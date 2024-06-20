@@ -94,61 +94,67 @@ class proxysql::params {
         '2016'  => '6',
         default => $facts['os']['release']['major'],
       }
+      # Use alma variant for RHEL-like OSes. e.g. https://repo.proxysql.com/ProxySQL/proxysql-2.5.x/almalinux/9
+      $os_name = $facts['os']['name'] ? {
+        'Rocky' => 'almalinux', # ProxySQL doesn't have a Rocky specific repo so we use Alma's.
+        'Alma'  => 'almalinux',
+        default => 'centos',
+      }
       $repo14             = {
         name     => 'proxysql_1_4',
         descr    => 'ProxySQL 1.4.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-1.4.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-1.4.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-1.4.x/repo_pub_key',
       }
       $repo20             = {
         name     => 'proxysql_2_0',
         descr    => 'ProxySQL 2.0.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.0.x/centos/${repo_os_major_version}",
+        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.0.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.0.x/repo_pub_key',
       }
       $repo21             = {
         name     => 'proxysql_2_1',
         descr    => 'ProxySQL 2.1.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.1.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-2.1.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.1.x/repo_pub_key',
       }
       $repo22             = {
         name     => 'proxysql_2_2',
         descr    => 'ProxySQL 2.2.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.2.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-2.2.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.2.x/repo_pub_key',
       }
       $repo23             = {
         name     => 'proxysql_2_3',
         descr    => 'ProxySQL 2.3.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.3.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-2.3.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.3.x/repo_pub_key',
       }
       $repo24             = {
         name     => 'proxysql_2_4',
         descr    => 'ProxySQL 2.4.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.4.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-2.4.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.4.x/repo_pub_key',
       }
       $repo25             = {
         name     => 'proxysql_2_5',
         descr    => 'ProxySQL 2.5.x YUM repository',
-        baseurl  => "http://repo.proxysql.com/ProxySQL/proxysql-2.5.x/centos/${repo_os_major_version}",
+        baseurl  => "https://repo.proxysql.com/ProxySQL/proxysql-2.5.x/${os_name}/${repo_os_major_version}",
         enabled  => true,
         gpgcheck => true,
-        gpgkey   => 'http://repo.proxysql.com/ProxySQL/repo_pub_key',
+        gpgkey   => 'https://repo.proxysql.com/ProxySQL/proxysql-2.5.x/repo_pub_key',
       }
     }
     default: {
